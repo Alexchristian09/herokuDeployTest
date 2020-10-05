@@ -17,6 +17,11 @@ class BooksController < ApplicationController
       flash[:notice] = "Book created successfully."
       redirect_to(books_path)
     else
+      out = ''
+      @book.errors.full_messages.each do |msg|
+        out = out + ' ' + msg
+      end
+      flash[:notice] = out
       render('new')
     end
   end
